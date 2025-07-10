@@ -23,7 +23,6 @@ export const loginAPI = async (email: string, password: string) => {
 
 // ✅ Register API
 export const registerAPI = async (name: string, email: string, password: string) => {
-  console.log(env.apiBaseUrl)
   const res = await fetch(`${env.apiBaseUrl}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

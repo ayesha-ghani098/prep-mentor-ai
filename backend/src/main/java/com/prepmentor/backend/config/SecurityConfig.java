@@ -32,7 +32,13 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ CORS in chain
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // allow login/register
+                        .requestMatchers("/api/auth/**","/api/users/**",
+                                "/api-docs/swagger-config/**",
+                                "/api-docs/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**").permitAll() // allow login/register
                         .anyRequest().authenticated()
                 );
         return http.build();

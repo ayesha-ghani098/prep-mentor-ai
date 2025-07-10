@@ -5,12 +5,16 @@ interface PrimaryButtonProps {
   type?: "submit" | "button";
   onClick?: () => void;
   children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   type = "button",
   onClick,
   children,
+  className,
+  disabled = false,
 }) => {
   return (
     <Button
@@ -18,7 +22,8 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       variant="contained"
       color="primary"
       onClick={onClick}
-      className="w-full py-3 mt-2 rounded-lg text-lg font-medium transition-all duration-300 hover:scale-[1.02]"
+      className={className}
+      disabled={disabled}
     >
       {children}
     </Button>

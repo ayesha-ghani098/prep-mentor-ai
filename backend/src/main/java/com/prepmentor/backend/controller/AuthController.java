@@ -8,7 +8,9 @@ import com.prepmentor.backend.model.User;
 import com.prepmentor.backend.repository.UserRepository;
 import com.prepmentor.backend.common.ApiResponse;
 import com.prepmentor.backend.service.CustomUserDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +36,7 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody AuthRequest request) {
+    public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody AuthRequest request) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
@@ -62,8 +64,10 @@ public class AuthController {
         }
     }
 
+
+
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<String>> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<ApiResponse<String>> register(@Valid @RequestBody RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             ApiResponse<String> response = new ApiResponse<>(
                     400,
@@ -91,4 +95,5 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
 }

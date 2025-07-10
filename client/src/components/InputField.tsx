@@ -1,39 +1,17 @@
 // components/InputField.tsx
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
+import { inputClass } from "../styles/tailwindStyles";
 
-interface InputFieldProps {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  fullWidth?: boolean;
-  required?: boolean;
-  error?: boolean;
-  helperText?: string;
+interface InputFieldProps extends Omit<TextFieldProps, "variant"> {
+  className?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
-  label,
-  type = "text",
-  value,
-  onChange,
-  fullWidth = true,
-  required = false,
-  error = false,
-  helperText = "",
-}) => {
+const InputField: React.FC<InputFieldProps> = ({ className, ...rest }) => {
   return (
     <TextField
-      label={label}
-      type={type}
-      value={value}
-      onChange={onChange}
-      required={required}
-      error={error}
-      helperText={helperText}
-      fullWidth={fullWidth}
+      {...rest}
       variant="outlined"
-      className="bg-white"
+      className={`${inputClass} ${className || ""}`}
     />
   );
 };

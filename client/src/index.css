@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Optional: Ensure the body and html also have full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
